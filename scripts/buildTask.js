@@ -10,7 +10,7 @@ const alias = require('@rollup/plugin-alias');
 // 提取css
 // const css = require('rollup-plugin-css-only');
 const babel = require('rollup-plugin-babel');
-const myPlugin = require('./plugina.js');
+const myPlugin = require('./myPlugin.js');
 
 const extensions = ['.js', '.ts', '.vue'];
 
@@ -34,8 +34,7 @@ const inputPlugin = [
         include: ['packages/**/*.ts', 'packages/**/*.js', 'packages/**/*.vue'],
         exclude: 'node_modules/**'
     }),
-    buble(), // https://github.com/vuejs/rollup-plugin-vue/issues/262
-    myPlugin()
+    buble() // https://github.com/vuejs/rollup-plugin-vue/issues/262
 ];
 const outputPlugin = [];
 
@@ -45,10 +44,16 @@ async function devBuildTask(input, output) {
         output
     });
     watcher.on('event', event => {
-        if (event.code === 'END') {
-            console.log('构建结束');
+        switch (event.code) {
+            case 'END':
+                console.log('build completed');
+                break;
+            case 'ERROR':
+                break;
+            case 'FATAL':
+                watcher.close();
+                break;
         }
-        // console.log(event);
     });
 }
 
@@ -74,19 +79,28 @@ async function buildWorker(pkg, nextBuildTask) {
         );
     }
 
+    const output = buildOpt.output.map(outputConf => {
+        inputPlugin.unshift(
+            myPlugin({
+                root: pkg,
+                dist: outputConf.dist.split('/')[0]
+            })
+        );
+        return {
+            file: path.join(pkg, outputConf.dist),
+            format: outputConf.format,
+            name: outputConf.name || '',
+            globals,
+            sourcemap: false,
+            outputPlugin
+        };
+    });
+
     const input = {
         input: path.join(pkg, buildOpt.input.src),
         plugins: inputPlugin,
         external
     };
-    const output = buildOpt.output.map(outputConf => ({
-        file: path.join(pkg, outputConf.dist),
-        format: outputConf.format,
-        name: outputConf.name || '',
-        globals,
-        sourcemap: false,
-        outputPlugin
-    }));
 
     if (process.env.NODE_ENV === 'production') {
         await prodBuildTask(input, output);
