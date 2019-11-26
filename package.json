@@ -1,0 +1,38 @@
+{
+    "name": "root",
+    "private": true,
+    "workspaces": [
+        "packages/*",
+        "demo"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/preset-env": "^7.7.1",
+        "@babel/preset-typescript": "^7.7.2",
+        "@rollup/plugin-alias": "^2.2.0",
+        "@rollup/plugin-buble": "^0.20.0",
+        "@vue/cli-plugin-typescript": "^4.0.5",
+        "@vue/cli-service": "^4.0.5",
+        "core-js": "3",
+        "glob": "^7.1.6",
+        "lerna": "^3.18.3",
+        "node-sass": "^4.13.0",
+        "rollup": "^1.26.3",
+        "rollup-plugin-babel": "^4.3.3",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-css-only": "^1.0.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-postcss": "^2.0.3",
+        "rollup-plugin-typescript2": "^0.25.2",
+        "rollup-plugin-vue": "^5.1.2",
+        "sass-loader": "^8.0.0",
+        "typescript": "^3.7.2"
+    },
+    "scripts": {
+        "postinstall": "lerna bootstrap",
+        "demo": "lerna run --scope demo dev",
+        "dev": "node scripts/watch.js",
+        "build": "node scripts/build.js"
+    },
+    "dependencies": {}
+}

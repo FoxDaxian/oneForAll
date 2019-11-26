@@ -1,0 +1,16 @@
+{
+    "compileOnSave": false,
+    "include": [
+        "packages/**/*.ts",
+        "packages/**/*.vue",
+        "demo/**/*.ts",
+        "demo/**/*.tsx",
+        "demo/**/*.vue",
+    ],
+    "exclude": ["node_modules"],
+    "sourceMap": true,
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "module": "es2015"
+    }
+}

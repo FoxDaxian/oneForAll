@@ -1,0 +1,38 @@
+{
+    "name": "iscroll-business",
+    "version": "1.0.0",
+    "main": "lib/iscroll-business.js",
+    "module": "lib/iscroll-business.esm.js",
+    "types": "index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "test": "echo 123"
+    },
+    "peerDependencies": {
+        "iscroll": "^5.0.0"
+    },
+    "buildOpt": {
+        "input": {
+            "src": "index.ts"
+        },
+        "output": [
+            {
+                "env": "production",
+                "dist": "lib/iscroll-business.js",
+                "format": "umd",
+                "name": "iscroll-business"
+            },
+            {
+                "env": "production",
+                "dist": "lib/iscroll-business.esm.js",
+                "format": "esm"
+            }
+        ],
+        "globals": {
+            "iscroll/build/iscroll-probe": "IScroll"
+        },
+        "external": [
+            "iscroll/build/iscroll-probe"
+        ]
+    }
+}
