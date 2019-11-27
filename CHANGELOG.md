@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * 修复 ([1340278](https://github.com/FoxDaxian/oneForAll/commit/13402785742d63118acfe3880bc0e6952c404683))
+* 增加lerna配置 ([1032f04](https://github.com/FoxDaxian/oneForAll/commit/1032f044bf5546cc5eec4103130274a246a02e23))
 
 
 ### Features
