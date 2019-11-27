@@ -7,16 +7,24 @@
     "jest": {
         "automock": true
     },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
     "devDependencies": {
         "@babel/core": "^7.7.2",
         "@babel/preset-env": "^7.7.1",
         "@babel/preset-typescript": "^7.7.2",
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
         "@rollup/plugin-alias": "^2.2.0",
         "@rollup/plugin-buble": "^0.20.0",
         "@vue/cli-plugin-typescript": "^4.0.5",
         "@vue/cli-service": "^4.0.5",
         "core-js": "3",
         "glob": "^7.1.6",
+        "husky": "^3.1.0",
         "jest": "^24.9.0",
         "lerna": "^3.18.3",
         "node-sass": "^4.13.0",
