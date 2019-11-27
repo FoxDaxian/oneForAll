@@ -7,7 +7,7 @@ const resolveNpmModule = require('rollup-plugin-node-resolve');
 const js2es6 = require('rollup-plugin-commonjs');
 const buble = require('@rollup/plugin-buble');
 const alias = require('@rollup/plugin-alias');
-const {uglify} = require('rollup-plugin-uglify');
+const {terser} = require('rollup-plugin-terser');
 const postcss = require('rollup-plugin-postcss');
 const babel = require('rollup-plugin-babel');
 const clear = require('./rollup-plugin-clear.js');
@@ -56,7 +56,7 @@ const generateInputPlugin = env => {
         })
     );
     if (isProd) {
-        inputPluginObj.afterVue.push(uglify());
+        inputPluginObj.afterVue.push(terser());
     }
 
     return [
