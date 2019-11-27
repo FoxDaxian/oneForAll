@@ -5,11 +5,8 @@
 
 ### TODO
 - 需要测试用例进行单元测试
-- 增加自动化格式 如果未通过[lint-staged](https://github.com/okonet/lint-staged)，则取消这次commit
-- 规范你的commit message 并根据commit 自动生成 changelog
 - [接入storebook]
 - [react]
-- __test__
 
 
 
