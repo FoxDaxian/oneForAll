@@ -1,5 +1,14 @@
 {
     "version": "independent",
     "npmClient": "yarn",
-    "useWorkspaces": true
+    "useWorkspaces": true,
+    "command": {
+        "publish": {
+            "message": "chore: publish"
+        },
+        "version": {
+            "conventionalCommits": true,
+            "changelogPreset": "angular"
+        }
+    }
 }
