@@ -3,18 +3,13 @@
 [五个小提示](https://medium.com/shopback-engineering/5-tips-about-lerna-4186840093f2)
 [教程](https://medium.com/hy-vee-engineering/creating-a-monorepo-with-lerna-yarn-workspaces-cf163908965d)
 
-
-###  问题
-- 为什么安装之后的node_modules空荡荡？ lerna将依赖移到了根目录下，然后具体的包增加了软链
-
 ### TODO
-- 在参考参考别人的想法
-- 只需要打包了吧？目前看来是不需要dev模式的 使用make进行封装
 - 需要测试用例进行单元测试
-- 接入ts
 - 增加自动化格式 如果未通过[lint-staged](https://github.com/okonet/lint-staged)，则取消这次commit
 - 规范你的commit message 并根据commit 自动生成 changelog
-- 接入storebook？
+- [接入storebook]
+- [react]
+- __test__
 
 
 
@@ -27,10 +22,4 @@
 -  rollup plugin 需要注意顺序
 - peerDependencies 发布后才有效的样子，本地的时候需要本地安装到devDependencies
 - .babelrc不会载入了..
-
-
-### todo
-- [react]
-- css [only]
-- __test__
-- 压缩
+- 为什么安装之后的node_modules空荡荡？ lerna将依赖移到了根目录下，然后具体的包增加了软链

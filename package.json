@@ -21,10 +21,9 @@
         "rollup": "^1.26.3",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-css-only": "^1.0.0",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-postcss": "^2.0.3",
-        "rollup-plugin-typescript2": "^0.25.2",
+        "rollup-plugin-uglify": "^6.0.3",
         "rollup-plugin-vue": "^5.1.2",
         "sass-loader": "^8.0.0",
         "typescript": "^3.7.2"

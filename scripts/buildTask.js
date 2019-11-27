@@ -7,35 +7,64 @@ const resolveNpmModule = require('rollup-plugin-node-resolve');
 const js2es6 = require('rollup-plugin-commonjs');
 const buble = require('@rollup/plugin-buble');
 const alias = require('@rollup/plugin-alias');
-// 提取css
-// const css = require('rollup-plugin-css-only');
+const {uglify} = require('rollup-plugin-uglify');
+const postcss = require('rollup-plugin-postcss');
 const babel = require('rollup-plugin-babel');
-const myPlugin = require('./myPlugin.js');
+const clear = require('./rollup-plugin-clear.js');
+const tips = require('./rollup-plugin-tips');
 
 const extensions = ['.js', '.ts', '.vue'];
 
-const inputPlugin = [
-    alias({resolve: extensions}),
-    js2es6({
-        include: 'node_modules/**',
-        exclude: ['packages/**', 'demo/**'],
-        extensions
-    }),
-    resolveNpmModule({
-        extensions
-    }),
-    // css(),
-    vue({
-        css: true
-    }),
-    babel({
-        extensions, // https://github.com/rollup/rollup-plugin-babel/issues/260
-        runtimeHelpers: true,
-        include: ['packages/**/*.ts', 'packages/**/*.js', 'packages/**/*.vue'],
-        exclude: 'node_modules/**'
-    }),
-    buble() // https://github.com/vuejs/rollup-plugin-vue/issues/262
-];
+const inputPluginObj = {
+    beforeVue: [
+        tips(),
+        alias({resolve: extensions}),
+        js2es6({
+            include: 'node_modules/**',
+            exclude: ['packages/**', 'demo/**'],
+            extensions
+        }),
+        resolveNpmModule({
+            extensions
+        })
+    ],
+    vue: [
+        vue({
+            css: false
+        })
+    ],
+    afterVue: [
+        babel({
+            extensions, // https://github.com/rollup/rollup-plugin-babel/issues/260
+            runtimeHelpers: true,
+            include: [
+                'packages/**/*.ts',
+                'packages/**/*.js',
+                'packages/**/*.vue'
+            ],
+            exclude: 'node_modules/**'
+        }),
+        buble() // https://github.com/vuejs/rollup-plugin-vue/issues/262
+    ]
+};
+const generateInputPlugin = env => {
+    const isProd = env === 'production';
+    inputPluginObj.afterVue.unshift(
+        postcss({
+            extensions: ['.css', '.sss', '.pcss', '.scss', '.sass'],
+            minimize: isProd
+        })
+    );
+    if (isProd) {
+        inputPluginObj.afterVue.push(uglify());
+    }
+
+    return [
+        ...inputPluginObj.beforeVue,
+        ...inputPluginObj.vue,
+        ...inputPluginObj.afterVue
+    ];
+};
 const outputPlugin = [];
 
 async function devBuildTask(input, output) {
@@ -79,34 +108,41 @@ async function buildWorker(pkg, nextBuildTask) {
         );
     }
 
-    const output = buildOpt.output.map(outputConf => {
-        inputPlugin.unshift(
-            myPlugin({
+    const generateOutput = env => {
+        const isProd = env === 'production';
+        inputPluginObj.beforeVue.unshift(
+            clear({
                 root: pkg,
-                dist: outputConf.dist.split('/')[0]
+                dist: buildOpt.output[0].dist.split('/')[0]
             })
         );
+        return buildOpt.output.map(outputConf => {
+            return {
+                file: path.join(pkg, outputConf.dist),
+                format: outputConf.format,
+                name: outputConf.name || '',
+                globals,
+                sourcemap: !isProd,
+                outputPlugin
+            };
+        });
+    };
+    const generateInput = inputPlugin => {
         return {
-            file: path.join(pkg, outputConf.dist),
-            format: outputConf.format,
-            name: outputConf.name || '',
-            globals,
-            sourcemap: false,
-            outputPlugin
+            input: path.join(pkg, buildOpt.input.src),
+            plugins: inputPlugin,
+            external
         };
-    });
-
-    const input = {
-        input: path.join(pkg, buildOpt.input.src),
-        plugins: inputPlugin,
-        external
     };
 
     if (process.env.NODE_ENV === 'production') {
-        await prodBuildTask(input, output);
+        const output = generateOutput('production');
+        const inputPlugin = generateInputPlugin('production');
+        await prodBuildTask(generateInput(inputPlugin), output);
     } else if (process.env.NODE_ENV === 'development') {
-        output.sourcemap = true;
-        await devBuildTask(input, output);
+        const output = generateOutput('development');
+        const inputPlugin = generateInputPlugin('development');
+        await devBuildTask(generateInput(inputPlugin), output);
     }
 
     return nextBuildTask();

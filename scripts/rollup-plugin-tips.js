@@ -1,5 +1,3 @@
-const path = require('path');
-const rimraf = require('rimraf');
 const ora = require('./ora');
 
 module.exports = function myExample({root, dist} = {}) {
@@ -7,8 +5,6 @@ module.exports = function myExample({root, dist} = {}) {
     return {
         name: 'rollup-plugin-clear',
         buildStart(inputOpt) {
-            const outputDir = path.join(root, dist);
-            rimraf.sync(outputDir);
         },
         generateBundle() {
             oraInstance && oraInstance.update('generate completed');
@@ -26,8 +22,11 @@ module.exports = function myExample({root, dist} = {}) {
         },
         buildEnd(err) {
             if (err) {
-                oraInstance && oraInstance.update('compiler error');
+                console.log('==========');
                 console.log(err);
+                console.log('==========');
+                oraInstance && oraInstance.stop();
+                return console.log('compiler error');
             }
             oraInstance && oraInstance.update('compiler completed');
         }
