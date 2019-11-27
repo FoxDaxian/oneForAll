@@ -2,8 +2,7 @@
     "name": "root",
     "private": true,
     "workspaces": [
-        "packages/*",
-        "demo"
+        "packages/*"
     ],
     "jest": {
         "automock": true
@@ -34,7 +33,6 @@
     },
     "scripts": {
         "postinstall": "lerna bootstrap",
-        "demo": "lerna run --scope demo dev",
         "dev": "node scripts/watch.js",
         "build": "node scripts/build.js",
         "test": "jest"
