@@ -5,6 +5,9 @@
         "packages/*",
         "demo"
     ],
+    "jest": {
+        "automock": true
+    },
     "devDependencies": {
         "@babel/core": "^7.7.2",
         "@babel/preset-env": "^7.7.1",
@@ -15,6 +18,7 @@
         "@vue/cli-service": "^4.0.5",
         "core-js": "3",
         "glob": "^7.1.6",
+        "jest": "^24.9.0",
         "lerna": "^3.18.3",
         "node-sass": "^4.13.0",
         "rimraf": "^3.0.0",
@@ -32,7 +36,8 @@
         "postinstall": "lerna bootstrap",
         "demo": "lerna run --scope demo dev",
         "dev": "node scripts/watch.js",
-        "build": "node scripts/build.js"
+        "build": "node scripts/build.js",
+        "test": "jest"
     },
     "dependencies": {}
 }

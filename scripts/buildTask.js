@@ -1,7 +1,6 @@
 const rollup = require('rollup');
 const utils = require('./utils');
 const path = require('path');
-// 用babel来支持ts
 const vue = require('rollup-plugin-vue');
 const resolveNpmModule = require('rollup-plugin-node-resolve');
 const js2es6 = require('rollup-plugin-commonjs');
