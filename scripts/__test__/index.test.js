@@ -1,5 +1,5 @@
-const utils = require('../utils');
+// const utils = require('../utils');
 
-test('sum', () => {
-    expect(utils.sum(1, 2)).toBe(3);
-});
+// test('sum', () => {
+//     expect(utils.sum(1, 2)).toBe(3);
+// });
