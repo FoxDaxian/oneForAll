@@ -29,5 +29,8 @@
     <template v-slot:loading>
         <div>pull up action: loading</div>
     </template>
+    <template v-slot:btmBlock>
+        <div>this block for fixed bottom bar or other fixed block</div>
+    </template>
 </smooth-scroll>
 ```

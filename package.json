@@ -10,7 +10,6 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn run changelog && git add .",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },

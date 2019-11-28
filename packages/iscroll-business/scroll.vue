@@ -31,6 +31,7 @@
                     <div class="nomore">没有更多了</div>
                 </slot>
             </div>
+            <slot name="btmBlock"></slot>
         </div>
     </div>
 </template>
