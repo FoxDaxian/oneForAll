@@ -9,6 +9,11 @@
         "smooth",
         "business"
     ],
+    "files": [
+        "lib",
+        "src",
+        "index.d.ts"
+    ],
     "main": "lib/iscroll-business.js",
     "module": "lib/iscroll-business.esm.js",
     "types": "index.d.ts",
@@ -21,7 +26,7 @@
     },
     "buildOpt": {
         "input": {
-            "src": "index.ts"
+            "src": "src/index.ts"
         },
         "output": [
             {
