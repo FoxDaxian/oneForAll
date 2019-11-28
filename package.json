@@ -10,6 +10,7 @@
     },
     "husky": {
         "hooks": {
+            "pre-commit": "yarn run changelog && git add .",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
@@ -46,7 +47,7 @@
         "postinstall": "lerna bootstrap",
         "dev": "node scripts/watch.js",
         "build": "node scripts/build.js",
-        "changelog": "node scripts/changelog.js",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "test": "jest"
     },
     "dependencies": {}
