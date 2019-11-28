@@ -3,7 +3,7 @@ import App from './App.vue';
 
 Vue.config.productionTip = false;
 
-import iscroll from 'iscroll-business';
+import iscroll from 'ofa-iscroll-business';
 
 Vue.use(iscroll);
 

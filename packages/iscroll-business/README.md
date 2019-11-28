@@ -2,6 +2,17 @@
 
 ##### iscroll for business
 
+##### get start
+
+- install
+
+`npm i ofa-iscroll-business -S | yarn add ofa-iscroll-business -S`
+
+- import and register
+
+`import iscroll from 'ofa-iscroll-business';`
+`Vue.use(iscroll);`
+
 ```html
 <!-- demo -->
 <!-- ref="iscrollBusiness": get iscroll-probe instance, so you can absolute control -->
