@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/FoxDaxian/oneForAll/compare/@ofa/iscroll-business@1.1.0...@ofa/iscroll-business@1.1.1) (2019-11-28)
+
+
+### Bug Fixes
+
+* 规范化 ([753791b](https://github.com/FoxDaxian/oneForAll/commit/753791bf2951cd9151c2e637bc47d0a943191245))
+
+
+
+
+
 # 1.1.0 (2019-11-28)
 
 
