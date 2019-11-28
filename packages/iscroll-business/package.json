@@ -13,8 +13,8 @@
     "module": "lib/iscroll-business.esm.js",
     "types": "index.d.ts",
     "license": "MIT",
-    "scripts": {
-        "test": "echo 123"
+    "publishConfig": {
+        "access": "public"
     },
     "peerDependencies": {
         "iscroll": "^5.0.0"
