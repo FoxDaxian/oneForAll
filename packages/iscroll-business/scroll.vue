@@ -1,5 +1,5 @@
 <template>
-    <div class="smoothScrollWrap" ref="wrap">
+    <div class="iscrollBusinessWrap" ref="wrap">
         <div class="scroller">
             <div
                 v-if="openPullDown"
@@ -51,7 +51,7 @@ const loadStatus: loadStatusEnum = {
     nomore: 'nomore'
 };
 export default {
-    name: 'smoothScroll',
+    name: 'iscrollBusiness',
     props: {
         openPullDown: {
             type: Boolean,
@@ -254,7 +254,7 @@ body {
         transform: rotate(360deg);
     }
 }
-.smoothScrollWrap {
+.iscrollBusinessWrap {
     position: absolute;
     z-index: 1;
     top: 0;

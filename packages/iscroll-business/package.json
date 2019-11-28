@@ -1,12 +1,13 @@
 {
     "author": "FoxDaxian <945039036@qq.com>",
-    "name": "iscroll-business",
+    "name": "@ofa/iscroll-business",
     "description": "integration iscroll for business",
     "version": "1.0.1",
     "homepage": "https://github.com/FoxDaxian/oneForAll",
     "keywords": [
         "iscroll",
-        "smooth"
+        "smooth",
+        "business"
     ],
     "main": "lib/iscroll-business.js",
     "module": "lib/iscroll-business.esm.js",

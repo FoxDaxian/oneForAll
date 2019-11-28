@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <div class="demo">
-            <smooth-scroll
-                ref="smoothScroll"
+            <iscroll-business
+                ref="iscrollBusiness"
                 :openPullDown="true"
                 :refreshSize="40"
                 @onPullDown="onPullDown"
@@ -17,7 +17,7 @@
                         {{ index }}
                     </div>
                 </template>
-            </smooth-scroll>
+            </iscroll-business>
         </div>
     </div>
 </template>

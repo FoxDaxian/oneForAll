@@ -4,11 +4,11 @@
 
 ```html
 <!-- demo -->
-<!-- ref="smoothScroll": get iscroll-probe instance, so you can absolute control -->
+<!-- ref="iscrollBusiness": get iscroll-probe instance, so you can absolute control -->
 <!-- openPullDown: toggle pull down refresh -->
 <!-- refreshSize: refresh block height, necessary if openPullDown is true -->
-<smooth-scroll
-    ref="smoothScroll"
+<iscroll-business
+    ref="iscrollBusiness"
     :openPullDown="true"
     :refreshSize="40"
     @onPullDown="onPullDown"
@@ -32,5 +32,5 @@
     <template v-slot:btmBlock>
         <div>this block for fixed bottom bar or other fixed block</div>
     </template>
-</smooth-scroll>
+</iscroll-business>
 ```
