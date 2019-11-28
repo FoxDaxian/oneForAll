@@ -1,6 +1,6 @@
 {
     "name": "demo",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "scripts": {
         "dev": "vue-cli-service serve",
@@ -9,7 +9,7 @@
     "dependencies": {
         "core-js": "^3.3.2",
         "iscroll": "^5.2.0",
-        "iscroll-business": "^1.0.1-alpha.1",
+        "iscroll-business": "^1.0.1",
         "vue": "^2.6.10",
         "vue-class-component": "^7.0.2",
         "vue-property-decorator": "^8.3.0"
