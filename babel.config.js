@@ -1,8 +1,8 @@
 module.exports = function(api) {
-    // api.cache(true);
-    api.cache.never();
+    const isTest = api.env('test');
+    let presets;
 
-    const presets = [
+    presets = [
         [
             '@babel/preset-env',
             {
@@ -13,6 +13,13 @@ module.exports = function(api) {
         ],
         '@babel/preset-typescript'
     ];
+
+    if (isTest) {
+        presets = [
+            ['@babel/preset-env', {targets: {node: 'current'}}],
+            '@babel/preset-typescript'
+        ];
+    }
     const plugins = [];
 
     return {

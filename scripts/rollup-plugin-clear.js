@@ -7,9 +7,6 @@ module.exports = function myExample({root, dist} = {}) {
         buildStart() {
             const outputDir = path.join(root, dist);
             rimraf.sync(outputDir);
-        },
-        renderChunk(code) {
-            return code
         }
     };
 };

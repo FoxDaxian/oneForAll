@@ -5,9 +5,6 @@
         "packages/*",
         "demo"
     ],
-    "jest": {
-        "automock": true
-    },
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
@@ -23,6 +20,7 @@
         "@rollup/plugin-buble": "^0.20.0",
         "@vue/cli-plugin-typescript": "^4.0.5",
         "@vue/cli-service": "^4.0.5",
+        "babel-jest": "^24.9.0",
         "conventional-changelog": "^3.1.15",
         "core-js": "3",
         "cz-conventional-changelog": "^3.0.2",
