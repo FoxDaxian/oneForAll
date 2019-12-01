@@ -5,9 +5,10 @@
         "packages/**/*.vue",
         "demo/**/*.ts",
         "demo/**/*.tsx",
-        "demo/**/*.vue",
+        "demo/**/*.vue"
     ],
     "exclude": ["node_modules"],
+    "allowJs": true,
     "sourceMap": true,
     "compilerOptions": {
         "experimentalDecorators": true,

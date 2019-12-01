@@ -20,3 +20,8 @@
 - peerDependencies 发布后才有效的样子，本地的时候需要本地安装到devDependencies
 - .babelrc不会载入了..
 - 为什么安装之后的node_modules空荡荡？ lerna将依赖移到了根目录下，然后具体的包增加了软链
+- jest需要babel 判断是否为test环境，然后取消module: false
+    - [babel-core的问题](https://github.com/facebook/jest/issues/4891#issuecomment-452335622)
+    - .vue和typescript需要babel-jest和vue-jest支，ts需添加：allowJs
+    - 至少有一个test(it)
+- 
