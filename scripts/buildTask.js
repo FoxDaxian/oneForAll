@@ -12,60 +12,6 @@ const babel = require('rollup-plugin-babel');
 const clear = require('./rollup-plugin-clear.js');
 const tips = require('./rollup-plugin-tips');
 
-const extensions = ['.js', '.ts', '.vue'];
-
-const inputPluginObj = {
-    beforeVue: [
-        tips(),
-        alias({resolve: extensions}),
-        js2es6({
-            include: 'node_modules/**',
-            exclude: ['packages/**', 'demo/**'],
-            extensions
-        }),
-        resolveNpmModule({
-            extensions
-        })
-    ],
-    vue: [
-        vue({
-            css: false
-        })
-    ],
-    afterVue: [
-        babel({
-            extensions, // https://github.com/rollup/rollup-plugin-babel/issues/260
-            runtimeHelpers: true,
-            include: [
-                'packages/**/*.ts',
-                'packages/**/*.js',
-                'packages/**/*.vue'
-            ],
-            exclude: 'node_modules/**'
-        }),
-        buble() // https://github.com/vuejs/rollup-plugin-vue/issues/262
-    ]
-};
-const generateInputPlugin = env => {
-    const isProd = env === 'production';
-    inputPluginObj.afterVue.unshift(
-        postcss({
-            extensions: ['.css', '.sss', '.pcss', '.scss', '.sass'],
-            minimize: isProd
-        })
-    );
-    if (isProd) {
-        inputPluginObj.afterVue.push(terser());
-    }
-
-    return [
-        ...inputPluginObj.beforeVue,
-        ...inputPluginObj.vue,
-        ...inputPluginObj.afterVue
-    ];
-};
-const outputPlugin = [];
-
 async function devBuildTask(input, output) {
     const watcher = await rollup.watch({
         ...input,
@@ -92,6 +38,41 @@ async function prodBuildTask(input, output) {
 
 // 当前 build 和 watch 是全部
 async function buildWorker(pkg, nextBuildTask) {
+    const extensions = ['.js', '.ts', '.vue'];
+
+    const outputPlugin = [];
+    const inputPluginObj = {
+        beforeVue: [
+            tips(),
+            alias({resolve: extensions}),
+            js2es6({
+                include: 'node_modules/**',
+                exclude: ['packages/**', 'demo/**'],
+                extensions
+            }),
+            resolveNpmModule({
+                extensions
+            })
+        ],
+        vue: [
+            vue({
+                css: false
+            })
+        ],
+        afterVue: [
+            babel({
+                extensions, // https://github.com/rollup/rollup-plugin-babel/issues/260
+                runtimeHelpers: true,
+                include: [
+                    'packages/**/*.ts',
+                    'packages/**/*.js',
+                    'packages/**/*.vue'
+                ],
+                exclude: 'node_modules/**'
+            }),
+            buble() // https://github.com/vuejs/rollup-plugin-vue/issues/262
+        ]
+    };
     const pkgJson = require(path.join(pkg, 'package.json'));
     const buildOpt = pkgJson.buildOpt;
     const peerDependencies = pkgJson.peerDependencies;
@@ -101,11 +82,33 @@ async function buildWorker(pkg, nextBuildTask) {
         globals = buildOpt.globals;
     } else {
         external = peerDependencies ? Object.keys(peerDependencies) : [];
-        globals = Object.assign.apply(
-            null,
-            external.map(packName => ({[packName]: packName}))
-        );
+        if (external.length > 0) {
+            globals = Object.assign.apply(
+                null,
+                external.map(packName => ({[packName]: packName}))
+            );
+        } else {
+            globals = {};
+        }
     }
+    const generateInputPlugin = env => {
+        const isProd = env === 'production';
+        inputPluginObj.afterVue.unshift(
+            postcss({
+                extensions: ['.css', '.sss', '.pcss', '.scss', '.sass'],
+                minimize: isProd
+            })
+        );
+        if (isProd) {
+            inputPluginObj.afterVue.push(terser());
+        }
+
+        return [
+            ...inputPluginObj.beforeVue,
+            ...inputPluginObj.vue,
+            ...inputPluginObj.afterVue
+        ];
+    };
 
     const generateOutput = env => {
         const isProd = env === 'production';

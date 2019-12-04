@@ -1,55 +1,34 @@
 <template>
-    <div id="app">
-        <div class="demo">
-            <iscroll-business
-                ref="iscrollBusiness"
-                :openPullDown="true"
-                :refreshSize="40"
-                @onPullDown="onPullDown"
-                @onPullUp="onPullUp"
-            >
-                <template v-slot:list>
-                    <div
-                        class="item"
-                        v-for="(list, index) in lists"
-                        :key="index"
-                    >
-                        {{ index }}
-                    </div>
-                </template>
-            </iscroll-business>
+    <div class="app">
+        <div class="menu" v-if="curRoute === '/'">
+            <div class="item" @click="jumpScroll">scroll-business</div>
+            <div class="item" @click="jumpimg">img-onerror</div>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
 
-@Component({
-    components: {
-        HelloWorld
-    }
-})
+@Component({})
 export default class App extends Vue {
     data() {
-        const lists = new Array(50).fill(1);
-        return {
-            lists
-        };
+        return {};
     }
-    onPullDown(completed: Function) {
-        setTimeout(function() {
-            completed();
-        }, 2000);
+    jumpScroll(): void {
+        this.$router.push({
+            name: 'scroll'
+        });
     }
-    onPullUp(completed: Function, nomore: Function) {
-        setTimeout(() => {
-            // this.lists = [...this.lists, ...this.lists];
-            nomore();
-        }, 2000);
+    jumpimg(): void {
+        this.$router.push({
+            name: 'imgOnerror'
+        });
     }
-    mounted() {}
+    get curRoute(): String {
+        return this.$route.fullPath;
+    }
 }
 </script>
 
@@ -60,21 +39,8 @@ body {
 </style>
 
 <style lang="scss" scoped>
-#app {
+.app {
     height: 100vh;
     box-sizing: border-box;
-    border: 1px solid red;
-    .demo {
-        height: 100%;
-        position: relative;
-    }
-
-    .item {
-        height: 50px;
-        text-align: center;
-        border: 1px solid blue;
-        box-sizing: border-box;
-        line-height: 50px;
-    }
 }
 </style>

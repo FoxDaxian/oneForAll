@@ -24,4 +24,4 @@
     - [babel-core的问题](https://github.com/facebook/jest/issues/4891#issuecomment-452335622)
     - .vue和typescript需要babel-jest和vue-jest支，ts需添加：allowJs
     - 至少有一个test(it)
-- 
+- generate type file => tsc --declaration xx.ts
