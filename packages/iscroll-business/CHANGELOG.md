@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/FoxDaxian/oneForAll/compare/ofa-iscroll-business@1.2.3...ofa-iscroll-business@1.2.4) (2019-12-05)
+
+
+### Bug Fixes
+
+* **iscroll-business:** compatible ([cfc4c4f](https://github.com/FoxDaxian/oneForAll/commit/cfc4c4f4fb70349e28f7959505f8039306885fc3))
+
+
+
+
+
 ## [1.2.3](https://github.com/FoxDaxian/oneForAll/compare/ofa-iscroll-business@1.2.2...ofa-iscroll-business@1.2.3) (2019-12-01)
 
 **Note:** Version bump only for package ofa-iscroll-business
