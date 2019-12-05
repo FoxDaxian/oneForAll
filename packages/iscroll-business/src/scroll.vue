@@ -75,6 +75,7 @@ export default {
             stylePercent: 0,
             canRefresh: false,
             canLoad: false,
+            canResetScroll: true,
             loadStatus: loadStatus.none
         };
     },
@@ -96,6 +97,29 @@ export default {
         scrollHandler() {
             pullDownHandler.call(this);
             pullUpHandler.call(this);
+            // 监听滚动 触发下面条件会自动回弹
+            // 触发的时候修改下面条件(A)之一，A会在scrollEnd中重置
+            // 但是，scroll会在触发touchEnd方法后，继续执行，导致死循环
+            if (this.canResetScroll && this.myScroll.y > 0) {
+                if (this.myScroll.pointY > window.innerHeight - 10) {
+                    this.canResetScroll = false;
+                    if (this.openPullDown) {
+                        touchEnd.call(this);
+                    } else {
+                        this.myScroll.scrollTo(0, 0, 600);
+                        this.onceScrollEnd();
+                    }
+                }
+            }
+        },
+        scrollEnd() {
+            if (!this.canResetScroll) {
+                this.canResetScroll = true;
+                this.myScroll.off('scrollEnd', this.scrollEnd);
+            }
+        },
+        onceScrollEnd() {
+            this.myScroll.on('scrollEnd', this.scrollEnd);
         },
         eventBindForWin(isDestroy: boolean) {
             operateEvent(window, 'resize', resetScroll, isDestroy);
@@ -191,12 +215,13 @@ function touchEnd(): void {
         this.canRefresh = true;
         scrollInstance.disable();
         this.$emit('onPullDown', () => {
+            this.onceScrollEnd();
             this.canLoad = false;
             this.loadStatus = loadStatus.none;
             scrollInstance.y = this.refreshH;
-            scrollInstance.resetPosition(300);
-            scrollInstance.enable();
+            scrollInstance.resetPosition(600);
             this.canRefresh = false;
+            scrollInstance.enable();
         });
     }
 }

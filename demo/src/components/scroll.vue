@@ -3,7 +3,7 @@
         <div class="demo">
             <iscroll-business
                 ref="iscrollBusiness"
-                :openPullDown="true"
+                :openPullDown="false"
                 :refreshSize="40"
                 @onPullDown="onPullDown"
                 @onPullUp="onPullUp"
