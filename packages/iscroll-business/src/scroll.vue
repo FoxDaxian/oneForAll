@@ -76,7 +76,8 @@ export default {
             canRefresh: false,
             canLoad: false,
             canResetScroll: true,
-            loadStatus: loadStatus.none
+            loadStatus: loadStatus.none,
+            alive: null
         };
     },
     mounted() {
@@ -90,8 +91,19 @@ export default {
         });
         this.init();
     },
+    activated() {
+        if (this.alive === false) {
+            this.alive = true;
+            this.init();
+        }
+    },
+    deactivated() {
+        this.alive = false;
+        this.destroy();
+    },
     beforeDestroy() {
         this.destroy();
+        this.destoryIscroll();
     },
     methods: {
         scrollHandler() {
@@ -141,6 +153,8 @@ export default {
             this.eventBindForWin(true);
             this.myScroll.off('scroll', this.scrollHandler);
             this.eventBindForWrap(true);
+        },
+        destoryIscroll() {
             this.myScroll.destroy();
             this.wrap = this.myScroll = null;
         }
@@ -268,11 +282,6 @@ function isPassive(): Boolean {
 }
 </script>
 
-<style>
-body {
-    touch-action: none;
-}
-</style>
 <style lang="scss" scoped>
 @keyframes rotate {
     100% {
