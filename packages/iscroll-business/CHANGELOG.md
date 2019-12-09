@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/FoxDaxian/oneForAll/compare/ofa-iscroll-business@1.2.4...ofa-iscroll-business@1.3.0) (2019-12-09)
+
+
+### Bug Fixes
+
+* **scroll:** iscroll bugs ([7162a66](https://github.com/FoxDaxian/oneForAll/commit/7162a66ccfa706dc8f83284ccb41f76205014e68))
+
+
+### Features
+
+* **iscroll:** add sideEffects ([815165d](https://github.com/FoxDaxian/oneForAll/commit/815165d26508c86d3caaeb20ea466b3259895591))
+
+
+
+
+
 ## [1.2.4](https://github.com/FoxDaxian/oneForAll/compare/ofa-iscroll-business@1.2.3...ofa-iscroll-business@1.2.4) (2019-12-05)
 
 
