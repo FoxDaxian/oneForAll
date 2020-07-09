@@ -8,12 +8,12 @@ Vue.use(Router);
 
 const routes = [
     {
-        path: 'scroll',
+        path: '/scroll',
         name: 'scroll',
         component: scroll
     },
     {
-        path: 'imgOnerror',
+        path: '/imgOnerror',
         name: 'imgOnerror',
         component: imgOnerror
     }

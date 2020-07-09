@@ -12,6 +12,7 @@
     "sourceMap": true,
     "compilerOptions": {
         "experimentalDecorators": true,
-        "module": "es2015"
+        "module": "es2015",
+        "declaration": true
     }
 }

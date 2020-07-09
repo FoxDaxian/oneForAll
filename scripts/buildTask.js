@@ -75,6 +75,38 @@ async function buildWorker(pkg, nextBuildTask) {
     };
     const pkgJson = require(path.join(pkg, 'package.json'));
     const buildOpt = pkgJson.buildOpt;
+    if (!buildOpt) {
+        // How can I use colors in ES6 template strings?
+        // https://stackoverflow.com/questions/35624801/how-can-i-use-colors-in-es6-template-strings
+
+        console.log(`\u001b[31m \n${pkg}'s package.json not have build options, please provide like this below:
+"buildOpt": {
+    "input": {
+        "src": "your application entry"
+    },
+    "output": [
+        {
+            "env": "production",
+            "dist": "output path",
+            "format": "umd",
+            "name": "img-onerror"
+        },
+        {
+            "env": "production",
+            "dist": "output path",
+            "format": "esm"
+        },
+        // more
+    ],
+    // rollup globals config optional
+    "globals": {
+    },
+    // rollup external config optional
+    "external": [
+    ]
+} \u001b[0m`);
+        return nextBuildTask();
+    }
     const peerDependencies = pkgJson.peerDependencies;
     let external, globals;
     if (buildOpt.external && buildOpt.globals) {

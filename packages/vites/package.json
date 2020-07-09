@@ -1,0 +1,50 @@
+{
+    "name": "ofa-vites",
+    "version": "1.0.0",
+    "description": "get website metrics",
+    "keywords": [
+        "performance",
+        "metrics"
+    ],
+    "author": "fengshiyu <fengshiyu@baidu.com>",
+    "homepage": "https://github.com/FoxDaxian/oneForAll#readme",
+    "license": "ISC",
+    "main": "lib/vites.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FoxDaxian/oneForAll.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "bugs": {
+        "url": "https://github.com/FoxDaxian/oneForAll/issues"
+    },
+    "buildOpt": {
+        "input": {
+            "src": "src/index.ts"
+        },
+        "output": [
+            {
+                "env": "production",
+                "dist": "lib/vites.js",
+                "format": "umd",
+                "name": "img-onerror"
+            },
+            {
+                "env": "production",
+                "dist": "lib/vites.esm.js",
+                "format": "esm"
+            }
+        ],
+        "globals": {},
+        "external": []
+    }
+}

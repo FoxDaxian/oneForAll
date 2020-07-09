@@ -1,10 +1,11 @@
 const ora = require('./ora');
 
 module.exports = function myExample({root, dist} = {}) {
-    let oraInstance = ora('build start');
+    let oraInstance;
     return {
         name: 'rollup-plugin-clear',
         buildStart(inputOpt) {
+            oraInstance = ora('build start');
         },
         generateBundle() {
             oraInstance && oraInstance.update('generate completed');
@@ -22,13 +23,15 @@ module.exports = function myExample({root, dist} = {}) {
         },
         buildEnd(err) {
             if (err) {
-                console.log('==========');
-                console.log(err);
-                console.log('==========');
+                console.log(`\u001b[31m \nbuild error \u001b[0m`);
+                console.log(`\u001b[31m ========== \u001b[0m`);
+                console.log(`\u001b[31m ${err} \u001b[0m`);
+                console.log(`\u001b[31m ========== \u001b[0m`);
                 oraInstance && oraInstance.stop();
                 return console.log('compiler error');
             }
             oraInstance && oraInstance.update('compiler completed');
+            
         }
     };
 };
