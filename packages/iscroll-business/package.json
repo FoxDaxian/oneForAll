@@ -22,7 +22,9 @@
         "access": "public"
     },
     "peerDependencies": {
-        "iscroll": "^5.0.0"
+        "iscroll": "^5.0.0",
+        "注释": "外部依赖，需要用户下载",
+        "注释": "https://stackoverflow.com/questions/44512249/rollup-globals-external"
     },
     "sideEffects": false,
     "buildOpt": {
@@ -42,9 +44,11 @@
                 "format": "esm"
             }
         ],
+        "注释": "flobals表明不被打包进去",
         "globals": {
             "iscroll/build/iscroll-probe": "IScroll"
         },
+        "注释": "external表明查找的路径",
         "external": [
             "iscroll/build/iscroll-probe"
         ]
